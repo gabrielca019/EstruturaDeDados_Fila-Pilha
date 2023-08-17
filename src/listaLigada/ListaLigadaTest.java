@@ -13,11 +13,11 @@ class ListaLigadaTest {
 
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoComeco("Fernando");
+		lista.adicionarNoComeco("Fernando");
 
-		assertEquals(1, lista.pegaTotalElementos());
-		assertEquals("Fernando", lista.pegaPrimeiro());
-		assertEquals("Fernando", lista.pegaUltima());
+		assertEquals(1, lista.getTotalElementos());
+		assertEquals("Fernando", lista.getPrimeiro());
+		assertEquals("Fernando", lista.pegarUltimoElemento());
 	}
 
 	@Test
@@ -25,13 +25,13 @@ class ListaLigadaTest {
 
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoComeco("Fernando");
-		lista.adicionaNoComeco("Maria");
-		lista.adicionaNoComeco("Carlos");
+		lista.adicionarNoComeco("Fernando");
+		lista.adicionarNoComeco("Maria");
+		lista.adicionarNoComeco("Carlos");
 
-		assertEquals(3, lista.pegaTotalElementos());
-		assertEquals("Carlos", lista.pegaPrimeiro());
-		assertEquals("Fernando", lista.pegaUltima());
+		assertEquals(3, lista.getTotalElementos());
+		assertEquals("Carlos", lista.getPrimeiro());
+		assertEquals("Fernando", lista.pegarUltimoElemento());
 
 	}
 
@@ -40,11 +40,11 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
+		lista.adicionarNoFinal("Fernando");
 
-		assertEquals(1, lista.pegaTotalElementos());
-		assertEquals("Fernando", lista.pegaPrimeiro());
-		assertEquals("Fernando", lista.pegaUltima());
+		assertEquals(1, lista.getTotalElementos());
+		assertEquals("Fernando", lista.getPrimeiro());
+		assertEquals("Fernando", lista.pegarUltimoElemento());
 
 
 	}
@@ -54,13 +54,13 @@ class ListaLigadaTest {
 
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
-		lista.adicionaNoFinal("Maria");
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Fernando");
+		lista.adicionarNoFinal("Maria");
+		lista.adicionarNoFinal("Carlos");
 
-		assertEquals(3, lista.pegaTotalElementos());
-		assertEquals("Fernando", lista.pegaPrimeiro());
-		assertEquals("Carlos", lista.pegaUltima());
+		assertEquals(3, lista.getTotalElementos());
+		assertEquals("Fernando", lista.getPrimeiro());
+		assertEquals("Carlos", lista.pegarUltimoElemento());
 
 	}
 	
@@ -69,7 +69,7 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
+		lista.adicionarNoFinal("Fernando");
 		
 		assertThrows(IllegalArgumentException.class, ()->lista.pega(-1));
 		
@@ -80,7 +80,7 @@ class ListaLigadaTest {
 	
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
+		lista.adicionarNoFinal("Fernando");
 		
 		assertThrows(IllegalArgumentException.class, ()->lista.pega(6));
 	}
@@ -90,9 +90,9 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
-		lista.adicionaNoFinal("Maria");
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Fernando");
+		lista.adicionarNoFinal("Maria");
+		lista.adicionarNoFinal("Carlos");
 
 		assertEquals("Fernando", lista.pega(0));
 		assertEquals("Maria", lista.pega(1));
@@ -106,9 +106,9 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 		
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Carlos");
 		
-		assertThrows(IllegalArgumentException.class, ()->lista.adicinaNaPosicao("Fernando", -1));
+		assertThrows(IllegalArgumentException.class, ()->lista.adicionarNaPosicao("Fernando", -1));
 		
 	}
 	
@@ -117,9 +117,9 @@ class ListaLigadaTest {
 	
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Carlos");
 		
-		assertThrows(IllegalArgumentException.class, ()->lista.adicinaNaPosicao("Fernando", 2));
+		assertThrows(IllegalArgumentException.class, ()->lista.adicionarNaPosicao("Fernando", 2));
 		
 	}
 	
@@ -128,11 +128,11 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
-		lista.adicionaNoFinal("Maria");
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Fernando");
+		lista.adicionarNoFinal("Maria");
+		lista.adicionarNoFinal("Carlos");
 
-		lista.adicinaNaPosicao("Rose", 1);
+		lista.adicionarNaPosicao("Rose", 1);
 		
 		assertEquals("Fernando", lista.pega(0));
 		assertEquals("Rose", lista.pega(1));
@@ -146,7 +146,7 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 		
-		assertFalse(lista.contem("Mauro"));
+		assertFalse(lista.contemElementoEspecificado("Mauro"));
 		
 	}
 	
@@ -155,11 +155,11 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
-		lista.adicionaNoFinal("Maria");
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Fernando");
+		lista.adicionarNoFinal("Maria");
+		lista.adicionarNoFinal("Carlos");
 		
-		assertFalse(lista.contem("Mauro"));
+		assertFalse(lista.contemElementoEspecificado("Mauro"));
 		
 	}
 	
@@ -168,11 +168,11 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
-		lista.adicionaNoFinal("Maria");
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Fernando");
+		lista.adicionarNoFinal("Maria");
+		lista.adicionarNoFinal("Carlos");
 		
-		assertTrue(lista.contem("Maria"));
+		assertTrue(lista.contemElementoEspecificado("Maria"));
 		
 		
 	}
@@ -182,7 +182,7 @@ class ListaLigadaTest {
 
 		ListaLigada lista = new ListaLigada();
 
-		assertThrows(RuntimeException.class, ()-> lista.removeDoComeco());
+		assertThrows(RuntimeException.class, ()-> lista.removerDoComeco());
 		
 	}
 	
@@ -191,15 +191,15 @@ class ListaLigadaTest {
 
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoComeco("Fernando");
-		lista.adicionaNoComeco("Maria");
-		lista.adicionaNoComeco("Carlos");
+		lista.adicionarNoComeco("Fernando");
+		lista.adicionarNoComeco("Maria");
+		lista.adicionarNoComeco("Carlos");
 		
-		lista.removeDoComeco();
+		lista.removerDoComeco();
 		
-		assertEquals(2, lista.pegaTotalElementos());
-		assertEquals("Maria", lista.pegaPrimeiro());
-		assertEquals("Fernando", lista.pegaUltima());
+		assertEquals(2, lista.getTotalElementos());
+		assertEquals("Maria", lista.getPrimeiro());
+		assertEquals("Fernando", lista.pegarUltimoElemento());
 
 	}
 	
@@ -208,12 +208,12 @@ class ListaLigadaTest {
 
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoComeco("Fernando");
+		lista.adicionarNoComeco("Fernando");
 		
 		
-		lista.removeDoComeco();
+		lista.removerDoComeco();
 		
-		assertEquals(0, lista.pegaTotalElementos());
+		assertEquals(0, lista.getTotalElementos());
 		assertTrue(lista.primeiroEhNulo());
 		assertTrue(lista.ultimoEhNulo());
 
@@ -233,15 +233,15 @@ class ListaLigadaTest {
 
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
-		lista.adicionaNoFinal("Maria");
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Fernando");
+		lista.adicionarNoFinal("Maria");
+		lista.adicionarNoFinal("Carlos");
 		
 		lista.removeDoFinal();
 		
-		assertEquals(2, lista.pegaTotalElementos());
-		assertEquals("Fernando", lista.pegaPrimeiro());
-		assertEquals("Maria", lista.pegaUltima());
+		assertEquals(2, lista.getTotalElementos());
+		assertEquals("Fernando", lista.getPrimeiro());
+		assertEquals("Maria", lista.pegarUltimoElemento());
 
 	}
 	
@@ -250,11 +250,11 @@ class ListaLigadaTest {
 
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
+		lista.adicionarNoFinal("Fernando");
 		
 		lista.removeDoFinal();
 		
-		assertEquals(0, lista.pegaTotalElementos());
+		assertEquals(0, lista.getTotalElementos());
 		assertTrue(lista.primeiroEhNulo());
 		assertTrue(lista.ultimoEhNulo());
 
@@ -265,9 +265,9 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 		
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Carlos");
 		
-		assertThrows(IllegalArgumentException.class, ()->lista.removeNaPosicao(-1));
+		assertThrows(IllegalArgumentException.class, ()->lista.removerNaPosicao(-1));
 		
 	}
 	
@@ -276,9 +276,9 @@ class ListaLigadaTest {
 	
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Carlos");
 		
-		assertThrows(IllegalArgumentException.class, ()->lista.removeNaPosicao(2));
+		assertThrows(IllegalArgumentException.class, ()->lista.removerNaPosicao(2));
 		
 	}
 	
@@ -287,13 +287,13 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
-		lista.adicionaNoFinal("Maria");
-		lista.adicionaNoFinal("Carlos");
+		lista.adicionarNoFinal("Fernando");
+		lista.adicionarNoFinal("Maria");
+		lista.adicionarNoFinal("Carlos");
 
-		lista.removeNaPosicao(1);
+		lista.removerNaPosicao(1);
 		
-		assertEquals(2, lista.pegaTotalElementos());
+		assertEquals(2, lista.getTotalElementos());
 		assertEquals("Fernando", lista.pega(0));
 		assertEquals("Carlos", lista.pega(1));
 		
@@ -304,11 +304,11 @@ class ListaLigadaTest {
 		
 		ListaLigada lista = new ListaLigada();
 
-		lista.adicionaNoFinal("Fernando");
+		lista.adicionarNoFinal("Fernando");
 
-		lista.removeNaPosicao(0);
+		lista.removerNaPosicao(0);
 		
-		assertEquals(0, lista.pegaTotalElementos());
+		assertEquals(0, lista.getTotalElementos());
 		assertTrue(lista.primeiroEhNulo());
 		assertTrue(lista.ultimoEhNulo());
 		

@@ -12,78 +12,72 @@ public class ListaLigada {
 	private static final String MSG_ERRO_AO_RECUPERAR_PRIMEIRA_POSICAO_ESTA_VAZIA = "Erro ao recuperar: nao contem elementos.";
 	private static final String MSG_ERRO_AO_INSERIR_POSICAO_INVALIDA = "Erro ao tentar inserir: posicao invalida.";
 
-	public void adicionaNoComeco(Object novoElemento) {
-
-		if (ehVazia()) {
-			Celula nova = new Celula(novoElemento);
-			this.primeira = nova;
-			this.ultima = nova;
+	public void adicionarNoComeco(Object novoElemento) {
+		if (verificarEstaVazia()) {
+			Celula novaCelula = new Celula(novoElemento);
+			this.primeira = novaCelula;
+			this.ultima = novaCelula;
 		} else {
-			Celula nova = new Celula(novoElemento, this.primeira);
-			this.primeira.setAnterior(nova);
-			this.primeira = nova;
+			Celula novaCelula = new Celula(novoElemento, this.primeira);
+			this.primeira.setAnterior(novaCelula);
+			this.primeira = novaCelula;
 		}
 		this.totalDeElementos++;
 	}
 
-	public void adicionaNoFinal(Object novoElemento) {
-
-		if (ehVazia()) {
-			adicionaNoComeco(novoElemento);
+	public void adicionarNoFinal(Object novoElemento) {
+		if (verificarEstaVazia()) {
+			adicionarNoComeco(novoElemento);
 		} else {
-			Celula nova = new Celula(novoElemento);
-			this.ultima.setProximo(nova);
-			nova.setAnterior(this.ultima);
-			this.ultima = nova;
+			Celula novaCelula = new Celula(novoElemento);
+			this.ultima.setProximo(novaCelula);
+			novaCelula.setAnterior(this.ultima);
+			this.ultima = novaCelula;
 			this.totalDeElementos++;
 		}
-
 	}
 
 	private boolean posicaoValidaInsercao(int posicao) {
 		return (posicao >= 0) && (posicao <= this.totalDeElementos);
 	}
 
-	public void adicinaNaPosicao(Object novoElemento, int posicao) {
-
-		if (!posicaoValidaInsercao(posicao)) {
+	public void adicionarNaPosicao(Object novoElemento, int posicao) {
+		if (!posicaoValidaInsercao(posicao)) 
 			throw new IllegalArgumentException(MSG_ERRO_AO_INSERIR_POSICAO_INVALIDA);
-		}
-
+		
 		if (posicao == 0) {
-			adicionaNoComeco(novoElemento);
+			adicionarNoComeco(novoElemento);
 		} else if (posicao == this.totalDeElementos) {
-			adicionaNoFinal(novoElemento);
+			adicionarNoFinal(novoElemento);
 		} else {
-			Celula anterior = pegaCelula(posicao - 1);
-			Celula proxima = anterior.getProximo();
+			Celula celulaAnterior = pegaCelula(posicao - 1);
+			Celula celulaProxima = celulaAnterior.getProximo();
 
-			Celula nova = new Celula(novoElemento, proxima);
-			nova.setAnterior(anterior);
-			anterior.setProximo(nova);
-			proxima.setAnterior(nova);
+			Celula celulaNova = new Celula(novoElemento, celulaProxima);
+			celulaNova.setAnterior(celulaAnterior);
+			celulaAnterior.setProximo(celulaNova);
+			celulaProxima.setAnterior(celulaNova);
 			this.totalDeElementos++;
 		}
 
 	}
 
-	public boolean ehVazia() {
+	public boolean verificarEstaVazia() {
 		return totalDeElementos == 0;
-
 	}
 
-	public int pegaTotalElementos() {
+	public int getTotalElementos() {
 		return totalDeElementos;
 	}
 
-	public Object pegaPrimeiro() {
+	public Object getPrimeiro() {
 		if (this.primeira == null)
 			throw new RuntimeException(MSG_ERRO_AO_RECUPERAR_PRIMEIRA_POSICAO_ESTA_VAZIA);
 
 		return this.primeira.getElemento();
 	}
 
-	public Object pegaUltima() {
+	public Object pegarUltimoElemento() {
 		if (this.ultima == null)
 			throw new RuntimeException(MSG_ERRO_AO_RECUPERAR_PRIMEIRA_POSICAO_ESTA_VAZIA);
 
@@ -95,47 +89,38 @@ public class ListaLigada {
 	}
 
 	private Celula pegaCelula(int posicao) {
-
-		if (!posicaoValidaRecuperar(posicao)) {
+		if (!posicaoValidaRecuperar(posicao)) 
 			throw new IllegalArgumentException(MSG_ERRO_AO_RECUPERAR_CELULA_POSICAO_INVALIDA);
-		}
-
-		Celula atual = this.primeira;
-
+		
+		Celula celulaAtual = this.primeira;
+		
 		for (int i = 0; i < posicao; i++) {
-			atual = atual.getProximo();
+			celulaAtual = celulaAtual.getProximo();
 		}
 
-		return atual;
-
+		return celulaAtual;
 	}
 
 	public Object pega(int posicao) {
-
 		return pegaCelula(posicao).getElemento();
-
 	}
 
-	public boolean contem(Object elementoBuscado) {
+	public boolean contemElementoEspecificado(Object elementoBuscado) {
+		Celula celulaAtual = this.primeira;
 
-		Celula atual = this.primeira;
-
-		while (atual != null) {
-
-			if (atual.getElemento().equals(elementoBuscado)) {
+		while (celulaAtual != null) {
+			if (celulaAtual.getElemento().equals(elementoBuscado)) 
 				return true;
-			}
-			atual = atual.getProximo();
+			celulaAtual = celulaAtual.getProximo();
 		}
-
+		
 		return false;
 	}
 
-	public void removeDoComeco() {
-
-		if (ehVazia()) {
+	public void removerDoComeco() {
+		if (verificarEstaVazia()) 
 			throw new RuntimeException(MSG_ERRO_REMOCAO_INVALIDA_LISTA_ESTA_VAZIA);
-		}
+		
 		this.primeira = this.primeira.getProximo();
 
 		if (this.totalDeElementos > 1) {
@@ -146,43 +131,38 @@ public class ListaLigada {
 		if (totalDeElementos == 0) {
 			this.ultima = null;
 		}
-
 	}
 
 	public void removeDoFinal() {
-
-		if (ehVazia()) {
+		if (verificarEstaVazia()) 
 			throw new RuntimeException(MSG_ERRO_REMOCAO_INVALIDA_LISTA_ESTA_VAZIA);
-		}
+		
 		if (this.totalDeElementos == 1) {
-			removeDoComeco();
+			removerDoComeco();
 		} else {
-			Celula penultima = this.ultima.getAnterior();
-			penultima.setProximo(null);
-			this.ultima = penultima;
+			Celula penultimaCelula = this.ultima.getAnterior();
+			penultimaCelula.setProximo(null);
+			this.ultima = penultimaCelula;
 			totalDeElementos--;
 		}
-
 	}
 
-	public void removeNaPosicao(int posicao) {
-
-		if (!posicaoValidaRecuperar(posicao)) {
+	public void removerNaPosicao(int posicao) {
+		if (!posicaoValidaRecuperar(posicao)) 
 			throw new IllegalArgumentException(MSG_ERRO_AO_REMOVER_CELULA_POSICAO_INVALIDA);
-		}
-
+		
 		if (posicao == 0) {
-			removeDoComeco();
+			removerDoComeco();
 		} 
 		else if (posicao == this.totalDeElementos) {
 			removeDoFinal();
 		} else { 
-			Celula anterior = this.pegaCelula(posicao - 1);
-			Celula atual = anterior.getProximo();
-			Celula proxima = atual.getProximo();
+			Celula celulaAnterior = this.pegaCelula(posicao - 1);
+			Celula celulaAtual = celulaAnterior.getProximo();
+			Celula celulaProxima = celulaAtual.getProximo();
 			
-			anterior.setProximo(proxima);
-			proxima.setAnterior(anterior);
+			celulaAnterior.setProximo(celulaProxima);
+			celulaProxima.setAnterior(celulaAnterior);
 			
 			this.totalDeElementos--;
 		}
@@ -195,5 +175,4 @@ public class ListaLigada {
 	public boolean ultimoEhNulo() {
 		return this.ultima == null;
 	}
-
 }

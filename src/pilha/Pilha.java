@@ -5,8 +5,8 @@ public class Pilha {
 	
 	private ListaLigada pilha = new ListaLigada();
 	
-	public void push (Object novoElemento) {
-		pilha.adicionaNoFinal(novoElemento);
+	public void push(Object novoElemento) {
+		pilha.adicionarNoFinal(novoElemento);
 	}
 	
 	public void pop() {
@@ -14,15 +14,15 @@ public class Pilha {
 	}
 	
 	public Object top() {
-		return pilha.pegaUltima();
+		return pilha.pegarUltimoElemento();
 	}
 	
-	public int pegaTamanho() {
-		return pilha.pegaTotalElementos();
+	public int getTamanho() {
+		return pilha.getTotalElementos();
 	}
 	
-	public boolean contem(Object elementoBuscado) {
-		return pilha.contem(elementoBuscado);
+	public boolean contemElementoEspecificado(Object elementoBuscado) {
+		return pilha.contemElementoEspecificado(elementoBuscado);
 	}
 
 }

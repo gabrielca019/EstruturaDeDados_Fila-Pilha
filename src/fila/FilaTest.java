@@ -1,35 +1,43 @@
 package fila;
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
+import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
 class FilaTest {
+	
+	Fila fila;
+	
+	@BeforeEach
+	@DisplayName("Inicializar o objeto Fila")
+	void inicializar() {
+		fila = new Fila();
+	}
 
 	@Test
+	@DisplayName("Adicionar elemento numa lista vazia")
 	void testAdicionarFilaVazia() {
-		
-		Fila fila = new Fila();
-		
 		fila.adicionar("Fernando");
 		
 		assertEquals(1, fila.pegaTamanho());
-		assertTrue(fila.contem("Fernando"));
+		assertTrue(fila.contemElementoEspecificado("Fernando"));
 		assertEquals("Fernando", fila.poll());
 	}
 	
 	@Test
+	@DisplayName("")
 	void testAdicionarFilaComElementos() {
-		
-		Fila fila = new Fila();
-		
 		fila.adicionar("Fernando");
 		fila.adicionar("Marcos");
 		fila.adicionar("Rose");
 		
 		assertEquals(3, fila.pegaTamanho());
-		assertTrue(fila.contem("Rose"));
-		assertTrue(fila.contem("Fernando"));
-		assertTrue(fila.contem("Marcos"));
+		assertTrue(fila.contemElementoEspecificado("Rose"));
+		assertTrue(fila.contemElementoEspecificado("Fernando"));
+		assertTrue(fila.contemElementoEspecificado("Marcos"));
 		assertEquals("Fernando", fila.poll());
 		assertEquals("Marcos", fila.poll());
 		assertEquals("Rose", fila.poll());
@@ -37,17 +45,11 @@ class FilaTest {
 	
 	@Test
 	void testRemoverFilaVazia() {
-		
-		Fila fila = new Fila();
-		
 		assertThrows(RuntimeException.class, ()->fila.remover());
 	}
 	
 	@Test
 	void testRemoverFilaComElementos() {
-		
-		Fila fila = new Fila();
-		
 		fila.adicionar("Fernando");
 		fila.adicionar("Marcos");
 		fila.adicionar("Rose");
@@ -55,10 +57,7 @@ class FilaTest {
 		fila.remover();
 		
 		assertEquals(2, fila.pegaTamanho());
-		assertTrue(fila.contem("Rose"));
-		assertTrue(fila.contem("Marcos"));
-		
+		assertTrue(fila.contemElementoEspecificado("Rose"));
+		assertTrue(fila.contemElementoEspecificado("Marcos"));
 	}
-
-
 }

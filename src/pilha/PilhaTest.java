@@ -13,8 +13,8 @@ class PilhaTest {
 		Pilha pilha = new Pilha();
 		pilha.push("rose");
 		
-		assertEquals(1, pilha.pegaTamanho());
-		assertTrue(pilha.contem("rose"));
+		assertEquals(1, pilha.getTamanho());
+		assertTrue(pilha.contemElementoEspecificado("rose"));
 		assertEquals("rose", pilha.top());
 		
 	}
@@ -25,9 +25,9 @@ class PilhaTest {
 		pilha.push("rose");
 		pilha.push("marcos");
 		
-		assertEquals(2, pilha.pegaTamanho());
-		assertTrue(pilha.contem("rose"));
-		assertTrue(pilha.contem("marcos"));
+		assertEquals(2, pilha.getTamanho());
+		assertTrue(pilha.contemElementoEspecificado("rose"));
+		assertTrue(pilha.contemElementoEspecificado("marcos"));
 		assertEquals("marcos", pilha.top());
 		
 		
@@ -50,9 +50,9 @@ class PilhaTest {
 		
 		pilha.pop();
 		
-		assertEquals(2, pilha.pegaTamanho());
-		assertTrue(pilha.contem("rose"));
-		assertTrue(pilha.contem("marcos"));
+		assertEquals(2, pilha.getTamanho());
+		assertTrue(pilha.contemElementoEspecificado("rose"));
+		assertTrue(pilha.contemElementoEspecificado("marcos"));
 		assertEquals("marcos", pilha.top());
 		
 	}
