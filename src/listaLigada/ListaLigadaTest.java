@@ -8,7 +8,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
-@DisplayName("Testes unitários da Pilha")
+@DisplayName("Testes unitários da Lista Ligada")
 class ListaLigadaTest {
 	
 	ListaLigada listaLigada;
