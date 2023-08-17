@@ -7,6 +7,7 @@ import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Testes unitários da Fila")
 class FilaTest {
 	
 	Fila fila;
@@ -18,7 +19,7 @@ class FilaTest {
 	}
 
 	@Test
-	@DisplayName("Adicionar elemento numa lista vazia")
+	@DisplayName("Adicionar um elemento numa lista vazia")
 	void testAdicionarFilaVazia() {
 		fila.adicionar("Fernando");
 		
@@ -28,7 +29,7 @@ class FilaTest {
 	}
 	
 	@Test
-	@DisplayName("")
+	@DisplayName("Adicionar vários elementos numa lista")
 	void testAdicionarFilaComElementos() {
 		fila.adicionar("Fernando");
 		fila.adicionar("Marcos");
@@ -44,11 +45,13 @@ class FilaTest {
 	}
 	
 	@Test
+	@DisplayName("Exception ao tentar remover de uma lista vazia")
 	void testRemoverFilaVazia() {
 		assertThrows(RuntimeException.class, ()->fila.remover());
 	}
 	
 	@Test
+	@DisplayName("Remover elemento de uma lista com elementos")
 	void testRemoverFilaComElementos() {
 		fila.adicionar("Fernando");
 		fila.adicionar("Marcos");
