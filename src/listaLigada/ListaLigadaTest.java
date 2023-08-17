@@ -4,314 +4,253 @@ import static org.junit.jupiter.api.Assertions.assertFalse;
 import static org.junit.jupiter.api.Assertions.assertThrows;
 import static org.junit.jupiter.api.Assertions.assertTrue;
 
+import org.junit.jupiter.api.BeforeEach;
+import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
 
+@DisplayName("Testes unitários da Pilha")
 class ListaLigadaTest {
-
+	
+	ListaLigada listaLigada;
+	
+	@BeforeEach
+	@DisplayName("Inicializar o objeto Pilha")
+	void inicializar() {
+		listaLigada = new ListaLigada();
+	}
+	
 	@Test
+	@DisplayName("Adicionar um elemento na lista vazia")
 	void testAdicionarNoComecoListaVazia() {
+		listaLigada.adicionarNoComeco("Fernando");
 
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoComeco("Fernando");
-
-		assertEquals(1, lista.getTotalElementos());
-		assertEquals("Fernando", lista.getPrimeiro());
-		assertEquals("Fernando", lista.pegarUltimoElemento());
+		assertEquals(1, listaLigada.getTotalElementos());
+		assertEquals("Fernando", listaLigada.getPrimeiro());
+		assertEquals("Fernando", listaLigada.pegarUltimoElemento());
 	}
 
 	@Test
+	@DisplayName("Adicionar vários elementos na lista")
 	void testAdicionarNoComecoComElementos() {
+		listaLigada.adicionarNoComeco("Fernando");
+		listaLigada.adicionarNoComeco("Maria");
+		listaLigada.adicionarNoComeco("Carlos");
 
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoComeco("Fernando");
-		lista.adicionarNoComeco("Maria");
-		lista.adicionarNoComeco("Carlos");
-
-		assertEquals(3, lista.getTotalElementos());
-		assertEquals("Carlos", lista.getPrimeiro());
-		assertEquals("Fernando", lista.pegarUltimoElemento());
-
+		assertEquals(3, listaLigada.getTotalElementos());
+		assertEquals("Carlos", listaLigada.getPrimeiro());
+		assertEquals("Fernando", listaLigada.pegarUltimoElemento());
 	}
 
 	@Test
+	@DisplayName("Adicionar um elemento no final da lista vazia")
 	void testAdicionarNoFinalListaVazia() {
-		
-		ListaLigada lista = new ListaLigada();
+		listaLigada.adicionarNoFinal("Fernando");
 
-		lista.adicionarNoFinal("Fernando");
-
-		assertEquals(1, lista.getTotalElementos());
-		assertEquals("Fernando", lista.getPrimeiro());
-		assertEquals("Fernando", lista.pegarUltimoElemento());
-
-
+		assertEquals(1, listaLigada.getTotalElementos());
+		assertEquals("Fernando", listaLigada.getPrimeiro());
+		assertEquals("Fernando", listaLigada.pegarUltimoElemento());
 	}
 
 	@Test
+	@DisplayName("Adicionar elementos no final com elementos já inseridos")
 	void testAdicionarNoFinalComElementos() {
+		listaLigada.adicionarNoFinal("Fernando");
+		listaLigada.adicionarNoFinal("Maria");
+		listaLigada.adicionarNoFinal("Carlos");
 
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoFinal("Fernando");
-		lista.adicionarNoFinal("Maria");
-		lista.adicionarNoFinal("Carlos");
-
-		assertEquals(3, lista.getTotalElementos());
-		assertEquals("Fernando", lista.getPrimeiro());
-		assertEquals("Carlos", lista.pegarUltimoElemento());
-
+		assertEquals(3, listaLigada.getTotalElementos());
+		assertEquals("Fernando", listaLigada.getPrimeiro());
+		assertEquals("Carlos", listaLigada.pegarUltimoElemento());
 	}
 	
 	@Test
+	@DisplayName("Exception para get na posição negativa")
 	void testPegarNaPosicaoInvalidaNegativa() {
+		listaLigada.adicionarNoFinal("Fernando");
 		
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoFinal("Fernando");
-		
-		assertThrows(IllegalArgumentException.class, ()->lista.pega(-1));
-		
+		assertThrows(IllegalArgumentException.class, ()->listaLigada.pega(-1));
 	}
 	
 	@Test
+	@DisplayName("Exception para get na posição sem elemento inserido")
 	void testPegarNaPosicaoInvalidaQuantidadeElementos() {
-	
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoFinal("Fernando");
+		listaLigada.adicionarNoFinal("Fernando");
 		
-		assertThrows(IllegalArgumentException.class, ()->lista.pega(6));
+		assertThrows(IllegalArgumentException.class, ()->listaLigada.pega(6));
 	}
 	
 	@Test
+	@DisplayName("Get em uma posição válida")
 	void testPegarNaPosicaoValida() {
-		
-		ListaLigada lista = new ListaLigada();
+		listaLigada.adicionarNoFinal("Fernando");
+		listaLigada.adicionarNoFinal("Maria");
+		listaLigada.adicionarNoFinal("Carlos");
 
-		lista.adicionarNoFinal("Fernando");
-		lista.adicionarNoFinal("Maria");
-		lista.adicionarNoFinal("Carlos");
-
-		assertEquals("Fernando", lista.pega(0));
-		assertEquals("Maria", lista.pega(1));
-		assertEquals("Carlos", lista.pega(2));
-		
-		
+		assertEquals("Fernando", listaLigada.pega(0));
+		assertEquals("Maria", listaLigada.pega(1));
+		assertEquals("Carlos", listaLigada.pega(2));
 	}
 	
 	@Test
+	@DisplayName("Exception para adicionar em uma posição negativa")
 	void testAdicionarNaPosicaoInvalidaNegativa() {
+		listaLigada.adicionarNoFinal("Carlos");
 		
-		ListaLigada lista = new ListaLigada();
-		
-		lista.adicionarNoFinal("Carlos");
-		
-		assertThrows(IllegalArgumentException.class, ()->lista.adicionarNaPosicao("Fernando", -1));
-		
+		assertThrows(IllegalArgumentException.class, ()->listaLigada.adicionarNaPosicao("Fernando", -1));
 	}
 	
 	@Test
+	@DisplayName("Exception para adicionar em uma posição inválida pela quantidade de elementos")
 	void testAdicionarNaPosicaoInvalidaQuantidadeElementos() {
-	
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoFinal("Carlos");
+		listaLigada.adicionarNoFinal("Carlos");
 		
-		assertThrows(IllegalArgumentException.class, ()->lista.adicionarNaPosicao("Fernando", 2));
-		
+		assertThrows(IllegalArgumentException.class, ()->listaLigada.adicionarNaPosicao("Fernando", 2));
 	}
 	
 	@Test
+	@DisplayName("Adicionar em uma posição válida")
 	void testAdicionarNaPosicaoValida() {
-		
-		ListaLigada lista = new ListaLigada();
+		listaLigada.adicionarNoFinal("Fernando");
+		listaLigada.adicionarNoFinal("Maria");
+		listaLigada.adicionarNoFinal("Carlos");
 
-		lista.adicionarNoFinal("Fernando");
-		lista.adicionarNoFinal("Maria");
-		lista.adicionarNoFinal("Carlos");
-
-		lista.adicionarNaPosicao("Rose", 1);
+		listaLigada.adicionarNaPosicao("Rose", 1);
 		
-		assertEquals("Fernando", lista.pega(0));
-		assertEquals("Rose", lista.pega(1));
-		assertEquals("Maria", lista.pega(2));
-		assertEquals("Carlos", lista.pega(3));
-		
+		assertEquals("Fernando", listaLigada.pega(0));
+		assertEquals("Rose", listaLigada.pega(1));
+		assertEquals("Maria", listaLigada.pega(2));
+		assertEquals("Carlos", listaLigada.pega(3));
 	}
 	
 	@Test
+	@DisplayName("False para pegar elemento que não existe na lista vazia")
 	void testContemListaVazia() {
-		
-		ListaLigada lista = new ListaLigada();
-		
-		assertFalse(lista.contemElementoEspecificado("Mauro"));
-		
+		assertFalse(listaLigada.contemElementoEspecificado("Mauro"));
 	}
 	
 	@Test
+	@DisplayName("False para pegar elemento que não existe na lista com elementos")
 	void testContemNaoAcharLista() {
+		listaLigada.adicionarNoFinal("Fernando");
+		listaLigada.adicionarNoFinal("Maria");
+		listaLigada.adicionarNoFinal("Carlos");
 		
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoFinal("Fernando");
-		lista.adicionarNoFinal("Maria");
-		lista.adicionarNoFinal("Carlos");
-		
-		assertFalse(lista.contemElementoEspecificado("Mauro"));
-		
+		assertFalse(listaLigada.contemElementoEspecificado("Mauro"));
 	}
 	
 	@Test
+	@DisplayName("Pegar elemento que existe na lista")
 	void testContemAcharLista() {
+		listaLigada.adicionarNoFinal("Fernando");
+		listaLigada.adicionarNoFinal("Maria");
+		listaLigada.adicionarNoFinal("Carlos");
 		
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoFinal("Fernando");
-		lista.adicionarNoFinal("Maria");
-		lista.adicionarNoFinal("Carlos");
-		
-		assertTrue(lista.contemElementoEspecificado("Maria"));
-		
-		
+		assertTrue(listaLigada.contemElementoEspecificado("Maria"));
 	}
 	
 	@Test
+	@DisplayName("Exception para remover da lista vazia")
 	void testRemoveDoComecoListaVazia() {
-
-		ListaLigada lista = new ListaLigada();
-
-		assertThrows(RuntimeException.class, ()-> lista.removerDoComeco());
-		
+		assertThrows(RuntimeException.class, ()-> listaLigada.removerDoComeco());
 	}
 	
 	@Test
+	@DisplayName("Remover do começo da lista com elementos")
 	void testRemoveDoComecoComElementos() {
-
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoComeco("Fernando");
-		lista.adicionarNoComeco("Maria");
-		lista.adicionarNoComeco("Carlos");
+		listaLigada.adicionarNoComeco("Fernando");
+		listaLigada.adicionarNoComeco("Maria");
+		listaLigada.adicionarNoComeco("Carlos");
 		
-		lista.removerDoComeco();
+		listaLigada.removerDoComeco();
 		
-		assertEquals(2, lista.getTotalElementos());
-		assertEquals("Maria", lista.getPrimeiro());
-		assertEquals("Fernando", lista.pegarUltimoElemento());
-
+		assertEquals(2, listaLigada.getTotalElementos());
+		assertEquals("Maria", listaLigada.getPrimeiro());
+		assertEquals("Fernando", listaLigada.pegarUltimoElemento());
 	}
 	
 	@Test
+	@DisplayName("Remover do começo da lista que contem apenas um elemento")
 	void testRemoveDoComecoComApenasUmElemento() {
-
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoComeco("Fernando");
+		listaLigada.adicionarNoComeco("Fernando");
 		
+		listaLigada.removerDoComeco();
 		
-		lista.removerDoComeco();
-		
-		assertEquals(0, lista.getTotalElementos());
-		assertTrue(lista.primeiroEhNulo());
-		assertTrue(lista.ultimoEhNulo());
-
+		assertEquals(0, listaLigada.getTotalElementos());
+		assertTrue(listaLigada.primeiroEhNulo());
+		assertTrue(listaLigada.ultimoEhNulo());
 	}
 	
 	@Test
+	@DisplayName("Exception para remover do final da lista vazia")
 	void testRemoveDoFinalListaVazia() {
-
-		ListaLigada lista = new ListaLigada();
-
-		assertThrows(RuntimeException.class, ()-> lista.removeDoFinal());
-		
+		assertThrows(RuntimeException.class, ()-> listaLigada.removeDoFinal());
 	}
 	
 	@Test
+	@DisplayName("Remover do final da lista com elementos")
 	void testRemoveDoFinalComElementos() {
-
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoFinal("Fernando");
-		lista.adicionarNoFinal("Maria");
-		lista.adicionarNoFinal("Carlos");
+		listaLigada.adicionarNoFinal("Fernando");
+		listaLigada.adicionarNoFinal("Maria");
+		listaLigada.adicionarNoFinal("Carlos");
 		
-		lista.removeDoFinal();
+		listaLigada.removeDoFinal();
 		
-		assertEquals(2, lista.getTotalElementos());
-		assertEquals("Fernando", lista.getPrimeiro());
-		assertEquals("Maria", lista.pegarUltimoElemento());
-
+		assertEquals(2, listaLigada.getTotalElementos());
+		assertEquals("Fernando", listaLigada.getPrimeiro());
+		assertEquals("Maria", listaLigada.pegarUltimoElemento());
 	}
 	
 	@Test
+	@DisplayName("Remover do final da lista com apenas um elemento")
 	void testRemoveDoFinalComApenasUmElemento() {
-
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoFinal("Fernando");
+		listaLigada.adicionarNoFinal("Fernando");
 		
-		lista.removeDoFinal();
+		listaLigada.removeDoFinal();
 		
-		assertEquals(0, lista.getTotalElementos());
-		assertTrue(lista.primeiroEhNulo());
-		assertTrue(lista.ultimoEhNulo());
-
+		assertEquals(0, listaLigada.getTotalElementos());
+		assertTrue(listaLigada.primeiroEhNulo());
+		assertTrue(listaLigada.ultimoEhNulo());
 	}
 	
 	@Test
+	@DisplayName("Exception para remover da lista na posição negativa")
 	void testRemoverNaPosicaoInvalidaNegativa() {
+		listaLigada.adicionarNoFinal("Carlos");
 		
-		ListaLigada lista = new ListaLigada();
-		
-		lista.adicionarNoFinal("Carlos");
-		
-		assertThrows(IllegalArgumentException.class, ()->lista.removerNaPosicao(-1));
-		
+		assertThrows(IllegalArgumentException.class, ()->listaLigada.removerNaPosicao(-1));
 	}
 	
 	@Test
+	@DisplayName("Exception para remover da lista na posição inválida da quantidade de elementos")
 	void testRemoverNaPosicaoInvalidaQuantidadeElementos() {
-	
-		ListaLigada lista = new ListaLigada();
-
-		lista.adicionarNoFinal("Carlos");
+		listaLigada.adicionarNoFinal("Carlos");
 		
-		assertThrows(IllegalArgumentException.class, ()->lista.removerNaPosicao(2));
-		
+		assertThrows(IllegalArgumentException.class, ()->listaLigada.removerNaPosicao(2));
 	}
 	
 	@Test
+	@DisplayName("Remover da posição válida")
 	void testRemoverNaPosicaoValida() {
-		
-		ListaLigada lista = new ListaLigada();
+		listaLigada.adicionarNoFinal("Fernando");
+		listaLigada.adicionarNoFinal("Maria");
+		listaLigada.adicionarNoFinal("Carlos");
 
-		lista.adicionarNoFinal("Fernando");
-		lista.adicionarNoFinal("Maria");
-		lista.adicionarNoFinal("Carlos");
-
-		lista.removerNaPosicao(1);
+		listaLigada.removerNaPosicao(1);
 		
-		assertEquals(2, lista.getTotalElementos());
-		assertEquals("Fernando", lista.pega(0));
-		assertEquals("Carlos", lista.pega(1));
-		
+		assertEquals(2, listaLigada.getTotalElementos());
+		assertEquals("Fernando", listaLigada.pega(0));
+		assertEquals("Carlos", listaLigada.pega(1));
 	}
 	
 	@Test
+	@DisplayName("Remover na posição válida da lista de apenas um elemento")
 	void testRemoverNaPosicaoValidaApenasUmElemento() {
-		
-		ListaLigada lista = new ListaLigada();
+		listaLigada.adicionarNoFinal("Fernando");
 
-		lista.adicionarNoFinal("Fernando");
-
-		lista.removerNaPosicao(0);
+		listaLigada.removerNaPosicao(0);
 		
-		assertEquals(0, lista.getTotalElementos());
-		assertTrue(lista.primeiroEhNulo());
-		assertTrue(lista.ultimoEhNulo());
-		
+		assertEquals(0, listaLigada.getTotalElementos());
+		assertTrue(listaLigada.primeiroEhNulo());
+		assertTrue(listaLigada.ultimoEhNulo());
 	}
-
 }
